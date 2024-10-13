@@ -7,16 +7,17 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 // Serve static files (HTML, CSS, JS)
-app.use(express.static(path.join(__dirname, 'public'))); // Assuming your HTML and related files are in a folder called 'public'
 // Your Google Maps API key
 const GOOGLE_MAPS_API_KEY = process.env.GOOGLE_MAPS_API_KEY;
 // Endpoint to get the API key
+app.use(express.static(path.join(__dirname, 'public'))); // Serve static files from the public directory
+
 app.get('/api/getdetails', (req, res) => {
     res.json({ apiKey: GOOGLE_MAPS_API_KEY });
 });
-// Root route
+
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index.html')); // Serve your index.html file
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 // Other routes...
 app.listen(PORT, () => {
