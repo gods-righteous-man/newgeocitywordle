@@ -1,29 +1,24 @@
 const express = require('express');
-const path = require('path');
-
+const cors = require('cors');
+const path = require('path'); // For serving static files
 const app = express();
 const PORT = process.env.PORT || 3000;
-
-// Middleware to parse JSON requests
+// Middleware
+app.use(cors());
 app.use(express.json());
-
-// Serve static files from the root directory
-app.use(express.static(path.join(__dirname))); 
-
-// Route to get the API key
+// Serve static files (HTML, CSS, JS)
+app.use(express.static(path.join(__dirname, 'public'))); // Assuming your HTML and related files are in a folder called 'public'
+// Your Google Maps API key
+const GOOGLE_MAPS_API_KEY = process.env.GOOGLE_MAPS_API_KEY;
+// Endpoint to get the API key
 app.get('/api/getdetails', (req, res) => {
-    const apiKey = process.env.GOOGLE_MAPS_API_KEY; // Assuming you're using an environment variable
-    if (apiKey) {
-        res.json({ apiKey });
-    } else {
-        res.status(404).json({ error: "API key not found" });
-    }
+    res.json({ apiKey: GOOGLE_MAPS_API_KEY });
 });
-
-// Serve index.html
+// Root route
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'index.html'));
+    res.sendFile(path.join(__dirname, 'public', 'index.html')); // Serve your index.html file
 });
-
-// Start the server
-module.exports = app;
+// Other routes...
+app.listen(PORT, () => {
+    console.log(`Server is running on http://localhost:${PORT}`);
+});
