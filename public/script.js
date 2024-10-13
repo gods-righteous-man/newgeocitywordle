@@ -1,4 +1,3 @@
-
 fetch('https://newgeocitywordle.vercel.app/api/getdetails')
 .then(response => response.json())
 .then(data => {

@@ -4,7 +4,9 @@ const path = require('path'); // For serving static files
 const app = express();
 const PORT = process.env.PORT || 3000;
 // Middleware
-app.use(cors());
+app.use(cors({
+    origin: 'https://newgeocitywordle.vercel.app/', // Replace with your actual frontend URL
+}));
 app.use(express.json());
 // Serve static files (HTML, CSS, JS)
 // Your Google Maps API key
