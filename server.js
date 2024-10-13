@@ -11,7 +11,7 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname))); 
 
 // Route to get the API key
-app.get('/api/get-api-key', (req, res) => {
+app.get('/api/getdetails', (req, res) => {
     const apiKey = process.env.GOOGLE_MAPS_API_KEY; // Assuming you're using an environment variable
     if (apiKey) {
         res.json({ apiKey });

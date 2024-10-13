@@ -1,5 +1,5 @@
 
-fetch('/api/get-api-key')
+fetch('/api/getdetails')
 .then(response => response.json())
 .then(data => {
   const apiKey = data.apiKey;  // Use the fetched API key here
